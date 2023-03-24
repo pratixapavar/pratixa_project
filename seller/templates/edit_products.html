@@ -1,0 +1,116 @@
+{% extends 'sheader.html' %}
+{% load static %}
+
+
+{% block content %}
+  <!-- nav section -->
+
+  <section class="nav_section">
+    <div class="container">
+      <div class="custom_nav2">
+        <h1>Edit Product</h1>
+        <nav class="navbar navbar-expand custom_nav-container ">
+          <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+
+
+          <form action="{% url 'product_edit' product_data.id %}" method="post" enctype="multipart/form-data">
+            {% csrf_token %}
+            <div class="row">
+                <div class="col-md-12">
+                  <div class="card card-primary">
+                    <div class="card-header">
+                      <h3 class="card-title">General</h3>
+        
+                      <div class="card-tools">
+                        <button type="button" class="btn btn-tool" data-card-widget="collapse" title="Collapse">
+                          <i class="fas fa-minus"></i>
+                        </button>
+                      </div>
+                    </div>
+                    <div class="card-body">
+                      <div class="form-group">
+                        <label for="inputName">Product Name</label>
+                        <input type="text" id="inputName" class="form-control" name="product_name" value="{{product_data.product_name}}">
+                      </div>
+                      <div class="form-group">
+                        <label for="inputDescription">Product Description</label>
+                        <textarea id="inputDescription" class="form-control" name="des" rows="4">{{product_data.des}}</textarea>
+                      </div>
+                      <div class="form-group">
+                        <label for="inputStatus">Price</label>
+                        <input type="text" id="inputName" class="form-control" name="price" value="{{product_data.price}}">
+                                    
+                      </div>
+                      <div class="form-group">
+                        <label for="inputStatus">Product Stock</label>
+                        <input type="text" id="inputName" class="form-control" name="product_stock" value="{{product_data.product_stock}}">
+                                    
+                      </div>
+                      <div class="form-group">
+                        <label for="inputClientCompany">Picture</label>
+                        <input type="file" id="inputClientCompany" name="pic" class="form-control" value="">
+                      </div>
+                    </div>
+                    <!-- /.card-body -->
+                  </div>
+                  <!-- /.card -->
+                </div>
+               
+              </div>
+              <div class="row">
+                <div class="col-12">
+                  <input type="submit" value="Save Changes" class="btn btn-success ">
+                </div>
+              </div>
+            
+          
+          </form>
+
+          <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <div class="d-flex  flex-column flex-lg-row align-items-center">
+              <ul class="navbar-nav  ">
+                
+
+                <li class="nav-item">
+                  <a class="nav-link" href="#">Login</a>
+                </li>
+              </ul>
+              <form class="form-inline my-2 my-lg-0 ml-0 ml-lg-4 mb-3 mb-lg-0">
+                <button class="btn  my-2 my-sm-0 nav_search-btn" type="submit"></button>
+              </form>
+            </div>
+          </div>
+        </nav>
+      </div>
+    </div>
+  </section>
+
+
+    <!-- shop section -->
+
+    <section class="shop_section layout_padding">
+      <div class="container">
+        <div class="box">
+          <div class="detail-box">
+            <h2>
+              Fruit shop
+            </h2>
+            <p>
+              There are many variations of passages of Lorem Ipsum available
+            </p>
+          </div>
+          <div class="img-box">
+            <img src="{% static 'images/shop-img.jpg' %}" alt="">
+          </div>
+          <div class="btn-box">
+            <a href="">
+              Buy Now
+            </a>
+          </div>
+        </div>
+      </div>
+    </section>
+  
+{% endblock %}

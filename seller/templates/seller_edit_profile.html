@@ -1,0 +1,84 @@
+{% extends 'sheader.html' %}
+{% load static %}
+
+
+{% block content %}
+  <!-- nav section -->
+
+  <section class="nav_section">
+    <div class="container">
+      <div class="custom_nav2">
+        <h1>Edit Prfoile</h1>
+        <nav class="navbar navbar-expand custom_nav-container ">
+          <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+
+
+          <form action="{% url 'seller_edit_profile' %}" method="post" enctype="multipart/form-data">
+            {% csrf_token %}
+            <div class="row">
+                <div class="col-md-12">
+                  <div class="card card-primary">
+                    <div class="card-header">
+                      <h3 class="card-title">General</h3>
+        
+                      <div class="card-tools">
+                        <button type="button" class="btn btn-tool" data-card-widget="collapse" title="Collapse">
+                          <i class="fas fa-minus"></i>
+                        </button>
+                      </div>
+                    </div>
+                    <div class="card-body">
+                      <div class="form-group">
+                        <label for="inputName">Full Name</label>
+                        <input type="text" id="inputName" class="form-control" name="full_name" value="{{seller_data.full_name}}">
+                      </div>
+                      <div class="form-group">
+                        <label for="inputName">GST Number</label>
+                        <input type="text" id="inputName" class="form-control" name="gst_no" value="{{seller_data.gst_no}}">
+                      </div>
+                      <div class="form-group">
+                        <label for="inputDescription">Address</label>
+                        <textarea id="inputDescription" name="address" class="form-control" rows="4">{{seller_data.address}}</textarea>
+                      </div>
+                      <div class="form-group">
+                        <label for="inputName">Email</label>
+                        <input type="email" class="form-control" id="inputName" name="email" value="{{seller_data.email}}"  disabled>
+                      </div>
+                      <div class="form-group">
+                        <label for="inputClientCompany">Profile Picture</label>
+                        <input type="file" id="inputClientCompany" class="form-control" name="pic">
+                      </div>
+                      
+                    </div>
+                    <!-- /.card-body -->
+                  </div>
+                  <!-- /.card -->
+                </div>
+               
+              </div>
+              <div class="row">
+                <div class="col-12">
+                  <input type="submit" value="Save Changes" >
+                </div>
+              </div>
+            </form>
+          
+          
+
+          <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <div class="d-flex  flex-column flex-lg-row align-items-center">
+              
+              <form class="form-inline my-2 my-lg-0 ml-0 ml-lg-4 mb-3 mb-lg-0">
+                <button class="btn  my-2 my-sm-0 nav_search-btn" type="submit"></button>
+              </form>
+            </div>
+          </div>
+        </nav>
+      </div>
+    </div>
+  </section>
+
+
+{% endblock %}

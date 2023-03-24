@@ -1,0 +1,163 @@
+{% extends 'header.html' %}
+{% load static %}
+
+
+    <!-- Page Header End -->
+
+{% block content %}
+    <!-- Contact Start -->
+    <div class="container-fluid pt-5">
+        <div class="container">
+
+            <div class="services-breadcrumb">
+		<div class="agile_inner_breadcrumb">
+			<div class="container">
+				<ul class="w3_short">
+					<li>
+						<a href="index.html">Home</a>
+						<i>|</i>
+					</li>
+					<li>Checkout</li>
+				</ul>
+			</div>
+		</div>
+	</div>
+
+            <h3 class="tittle">Checkout
+                <span class="heading-style">
+                    <i></i>
+                    <i></i>
+                    <i></i>
+                </span>
+            </h3>
+
+                <div class="table-responsive">
+					<table class="timetable_sub">
+						<thead>
+							<tr>
+								
+								<th>Picture</th>
+								<th>Product Name</th>
+								<th>Price</th>
+								<th>Remove</th>
+							</tr>
+						</thead>
+						<tbody>
+
+							{% for i in my_cart_data %}
+							<tr class="rem1">
+								<td class="invert-image">
+									<a href="single2.html">
+										<img src="{{i.pic.url}}" style="max-height: 110px; max-width: 110px;" alt=" " class="img-responsive">
+									</a>
+								</td>
+								
+								<td class="invert">{{i.product_name}}</td>
+								<td class="invert">${{i.price}}</td>
+								<td class="invert">
+									<button><a href="{% url 'del_cart_item' i.id %}" >Delete</a></button>
+								</td>
+							</tr>
+							{% endfor %}
+						</tbody>
+					</table>
+				</div>                
+            
+                <h3>You Have to Pay : ${{total_amount}}  </h3>
+
+
+                <div class="checkout-right-basket">
+                    <button id="pay-btn" >Make A Payment</button>
+                </div>               
+
+            
+            <div class="row">
+                
+                <div class="col-md-6 pb-5">
+                    <div class="contact-form">
+                        <div id="success"></div>
+                        <form name="sentMessage" id="contactForm" novalidate="novalidate">
+                            <div class="control-group">
+                                <input type="text" class="form-control bg-transparent p-4" id="name" placeholder="Your Name"
+                                    required="required" data-validation-required-message="Please enter your name" />
+                                <p class="help-block text-danger"></p>
+                            </div>
+                            <div class="control-group">
+                                <input type="email" class="form-control bg-transparent p-4" id="email" placeholder="Your Email"
+                                    required="required" data-validation-required-message="Please enter your email" />
+                                <p class="help-block text-danger"></p>
+                            </div>
+                            <div class="control-group">
+                                <input type="text" class="form-control bg-transparent p-4" id="subject" placeholder="mobile no"
+                                    required="required" data-validation-required-message="Please enter a subject" />
+                                <p class="help-block text-danger"></p>
+                            </div>
+                            
+                            <div>
+                                <button class="btn btn-primary font-weight-bold py-3 px-5" type="submit" id="sendMessageButton">Send
+                                    </button>
+                            </div>
+
+                            <div class="row px-3 pb-2">
+                
+                                <div class="col-sm-4 text-center mb-3">
+                                    <i class="fa fa-2x fa-phone-alt mb-3 text-primary"></i>
+                                    <h4 class="font-weight-bold">Phone</h4>
+                                    <p>+012 345 6789</p>
+                                </div>
+                                <div class="col-sm-4 text-center mb-3">
+                                    <i class="far fa-2x fa-envelope mb-3 text-primary"></i>
+                                    <h4 class="font-weight-bold">Email</h4>
+                                    <p>info@example.com</p>
+                                </div>
+                            </div>
+
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Contact End -->
+
+
+
+    <!-- Footer Start -->
+
+   
+
+<!-- Razorpay's Javascript code. -->
+<script src="https://checkout.razorpay.com/v1/checkout.js"></script>
+<script>
+	var options = {
+	
+	// Enter the Key ID generated from the Dashboard
+	key: "{{ razorpay_merchant_key }}",
+	
+	// Amount is in currency subunits.
+	// Default currency is INR. Hence,
+	// 50000 refers to 50000 paise
+	amount: "{{ razorpay_amount }}",
+	currency: "{{ currency }}",
+	
+	// Your/store name.
+	name: "Dj Razorpay",
+	
+	// Pass the `id` obtained in the response of Step 1
+	order_id: "{{ razorpay_order_id }}",
+	callback_url: "{{ callback_url }}",
+	};
+	
+	// initialise razorpay with the options.
+	var rzp1 = new Razorpay(options);
+	
+	// add event listener to the payment button.
+	document.getElementById("pay-btn").onclick = function (e) {
+	rzp1.open();
+	e.preventDefault();
+	};
+</script>
+
+
+
+   {% endblock %}
